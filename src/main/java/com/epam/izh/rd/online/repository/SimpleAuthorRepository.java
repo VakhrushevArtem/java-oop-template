@@ -13,7 +13,9 @@ public class SimpleAuthorRepository implements AuthorRepository{
             authors = Arrays.copyOf(authors, authors.length + 1);
             authors[authors.length - 1] = author;
             return true;
-        } else return false;
+        } else {
+            return false;
+        }
     }
 
     @Override
@@ -30,24 +32,18 @@ public class SimpleAuthorRepository implements AuthorRepository{
     @Override
     public boolean remove(Author author) {
         if (findByFullName(author.getName(), author.getLastName()) != null) {
-            for (int i = 0; i < authors.length; i ++) {
-                if (authors[i].equals(author)) {
-                    authors[i] = null;
-                }
-            }
             Author[] authorsTemp = new Author[authors.length - 1];
-            for (int i = 0, j = 0; i < authors.length;) {
-                if (authors[i] != null) {
-                    authors[i] = authorsTemp[j];
-                    i++;
+            for (int i = 0, j = 0; i < authors.length; i++) {
+                if (!authors[i].equals(author)) {
+                    authorsTemp[j] = authors[i];
                     j++;
-                } else {
-                    i++;
                 }
             }
             authors = authorsTemp;
             return true;
-        } else return false;
+        } else {
+            return false;
+        }
     }
 
     @Override
