@@ -9,7 +9,7 @@ public class SimpleAuthorRepository implements AuthorRepository{
 
     @Override
     public boolean save(Author author) {
-        if (!author.equals(findByFullName(author.getName(), author.getLastName()))) {
+        if (findByFullName(author.getName(), author.getLastName()) == null) {
             authors = Arrays.copyOf(authors, authors.length + 1);
             authors[authors.length - 1] = author;
             return true;
@@ -29,7 +29,7 @@ public class SimpleAuthorRepository implements AuthorRepository{
 
     @Override
     public boolean remove(Author author) {
-        if (author.equals(findByFullName(author.getName(), author.getLastName()))) {
+        if (findByFullName(author.getName(), author.getLastName()) != null) {
             for (int i = 0; i < authors.length; i ++) {
                 if (authors[i].equals(author)) {
                     authors[i] = null;
