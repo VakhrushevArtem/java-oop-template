@@ -41,7 +41,7 @@ public class SimpleSchoolBookRepository implements BookRepository<SchoolBook> {
         if (findByName(name).length > 0) {
             SchoolBook[] schoolBooksTemp = new SchoolBook[schoolBooks.length - findByName(name).length];
             for (int i = 0, j = 0; i < schoolBooks.length; i++) {
-                if (schoolBooks[i].getName().equals(name)) {
+                if (!schoolBooks[i].getName().equals(name)) {
                     schoolBooksTemp[j] = schoolBooks[i];
                     j++;
                 }
